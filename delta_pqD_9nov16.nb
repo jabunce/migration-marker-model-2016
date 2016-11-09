@@ -1,0 +1,1174 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     43000,       1165]
+NotebookOptionsPosition[     41501,       1113]
+NotebookOutlinePosition[     41883,       1130]
+CellTagsIndexPosition[     41840,       1127]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\[IndentingNewLine]",
+   FontSize->36], 
+  StyleBox[
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"derivations", " ", "of", " ", "delta", " ", "p"}], ",", " ", 
+     "q", ",", " ", 
+     RowBox[{"and", " ", "D", " ", "from", " ", 
+      RowBox[{"Richard", "'"}], "s", " ", "ethnic", " ", "boundary", " ", 
+      "model"}]}], "*)"}],
+   FontSize->12], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->12], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->12], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->12], 
+  StyleBox[
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "fitess", " ", "expression", " ", "from", " ", "payoff", " ", "matrix"}],
+      ",", " ", 
+     RowBox[{
+      RowBox[{"where", " ", "e"}], " ", "=", " ", "a"}]}], "*)"}],
+   FontSize->12], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->12], 
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"wijk", "=", " ", 
+      RowBox[{
+       RowBox[{"a", "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"pik", "*", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", "d"}], ")"}]}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1", "-", "pik"}], ")"}], "*", "1"}]}], ")"}]}], "+", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"1", "-", "a"}], ")"}], "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"xijk", "/", "qjk"}], "*", 
+           RowBox[{"(", 
+            RowBox[{"1", "+", "d"}], ")"}]}], "+", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"qjk", "-", "xijk"}], ")"}], "/", "qjk"}], "*", "1"}]}], 
+         ")"}]}]}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<wijk = \
+a*(pik*(1+d)+(1-pik)*1)+(1-a)*(xijk/qjk*(1+d)+(qjk-xijk)/qjk*1), which \
+simplifies to \>\"", ",", 
+      RowBox[{"Simplify", "[", "wijk", "]"}]}], "]"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "simplify", " ", "output", " ", "to", " ", "get", " ", "expression", " ",
+       "on", " ", "pg1", " ", "of", " ", "supplemental"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fitness", "=", 
+      RowBox[{"1", "+", 
+       RowBox[{"d", "*", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"a", "*", "pik"}], "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"1", "-", "a"}], ")"}], "*", 
+           RowBox[{"xijk", "/", "qjk"}], "*", "1"}]}], ")"}]}]}]}], ";"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<and can be rearranged to get wijk = \>\"", ",", "fitness"}],
+      "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Cov", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x11", "*", "x00"}], "-", 
+        RowBox[{"x01", "*", "x10"}]}], "/.", 
+       RowBox[{"{", "       ", 
+        RowBox[{"(*", "covariance", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"write", " ", 
+          RowBox[{"x", "'"}], "s", " ", "in", " ", "terms", " ", "of", " ", 
+          "x11"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x10", "->", 
+          RowBox[{"p1", "-", "x11"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"x01", "->", 
+          RowBox[{"q1", "-", "x11"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"x00", "->", 
+          RowBox[{"1", "-", "x11", "-", 
+           RowBox[{"(", 
+            RowBox[{"p1", "-", "x11"}], ")"}], "-", 
+           RowBox[{"(", 
+            RowBox[{"q1", "-", "x11"}], ")"}]}]}]}], "\[IndentingNewLine]", 
+        "}"}]}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<D = x11*x00-x01*x10. Written in terms of p1, q1, and x11, D= \>\"", 
+      ",", " ", 
+      RowBox[{"Simplify", "[", "Cov", "]"}]}], "]"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"rearrange", " ", 
+      RowBox[{"as", ":"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x11k", "=", 
+      RowBox[{
+       RowBox[{"p1k", "*", "q1k"}], "+", "Dk"}]}], ";"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x00k", "=", 
+      RowBox[{
+       RowBox[{"p0k", "*", "q0k"}], "+", "Dk"}]}], ";", " ", 
+     RowBox[{"(*", 
+      RowBox[{"analogous", " ", "for", " ", "x00k"}], "*)"}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", "\"\<rearrange as : \>\"", "]"}]}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<x11k = \>\"", ",", " ", "x11k"}], "]"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<x00k = \>\"", ",", " ", "x00k", ",", " ", 
+      "\"\< (analogously)\>\""}], "]"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Cov", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x11", "*", "x00"}], "-", 
+        RowBox[{"x01", "*", "x10"}]}], "/.", 
+       RowBox[{"{", "       ", 
+        RowBox[{"(*", "covariance", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{"write", " ", 
+          RowBox[{"x", "'"}], "s", " ", "in", " ", "terms", " ", "of", " ", 
+          "x10"}], "*)"}], "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"x11", "->", 
+          RowBox[{"p1", "-", "x10"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"x01", "->", 
+          RowBox[{"q1", "-", 
+           RowBox[{"(", 
+            RowBox[{"p1", "-", "x10"}], ")"}]}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"x00", "->", 
+          RowBox[{"1", "-", 
+           RowBox[{"(", 
+            RowBox[{"p1", "-", "x10"}], ")"}], "-", "x10", "-", 
+           RowBox[{"(", 
+            RowBox[{"q1", "-", 
+             RowBox[{"(", 
+              RowBox[{"p1", "-", "x10"}], ")"}]}], ")"}]}]}]}], 
+        "\[IndentingNewLine]", "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<expressed in terms of p1, q1, and x10, D = \>\"", ",", " ", 
+      RowBox[{"Simplify", "[", "Cov", "]"}]}], "]"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<Simplify to p1*(1-q1)-x10 = p1*q0-x10, and rearrange as : \>\"", 
+     "]"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x10k", "=", 
+      RowBox[{
+       RowBox[{"p1k", "*", "q0k"}], "-", "Dk"}]}], ";"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"x01k", "=", 
+      RowBox[{
+       RowBox[{"p0k", "*", "q1k"}], "-", "Dk"}]}], ";", 
+     RowBox[{"(*", 
+      RowBox[{"analogous", " ", "for", " ", "x01k"}], "*)"}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\<x10k = \>\"", ",", " ", "x10k"}], "]"}]}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<x01k = \>\"", ",", " ", "x01k", ",", " ", 
+      "\"\< (analogously)\>\""}], "]"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"phenotype", " ", "fitnesses"}], "*)"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"w11k", "=", 
+      RowBox[{"fitness", " ", "/.", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"pik", "\[Rule]", "p1k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"qjk", "\[Rule]", "q1k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"xijk", "\[Rule]", "x11k"}]}], " ", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{"these", " ", 
+           RowBox[{"x", "'"}], "s", " ", "are", " ", "already", " ", 
+           "defined", " ", "in", " ", "terms", " ", "of", " ", "p"}], ",", 
+          " ", "q", ",", " ", 
+          RowBox[{"and", " ", "D", " ", "above"}]}], "*)"}], 
+        "\[IndentingNewLine]", "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"w00k", "=", 
+      RowBox[{"fitness", " ", "/.", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"pik", "\[Rule]", "p0k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"qjk", "\[Rule]", "q0k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"xijk", "\[Rule]", "x00k"}]}], "\[IndentingNewLine]", 
+        "}"}]}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"w10k", "=", 
+      RowBox[{"fitness", " ", "/.", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"pik", "\[Rule]", "p1k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"qjk", "\[Rule]", "q0k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"xijk", "\[Rule]", "x10k"}]}], "\[IndentingNewLine]", 
+        "}"}]}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"w01k", "=", 
+      RowBox[{"fitness", " ", "/.", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"pik", "\[Rule]", "p0k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"qjk", "\[Rule]", "q1k"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"xijk", "\[Rule]", "x01k"}]}], "\[IndentingNewLine]", 
+        "}"}]}]}], ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<Phenotype fitnesses substituting p, q, and D for the x's: \>\"", 
+     "]"}], "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<w11k = \>\"", ",", " ", "w11k"}], "]"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<w00k = \>\"", ",", " ", "w00k"}], "]"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<w10k = \>\"", ",", " ", "w10k"}], "]"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<w01k = \>\"", ",", " ", "w01k"}], "]"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "phenotype", " ", "fitnesses", " ", "from", " ", "pg", " ", "1", " ", 
+      "of", " ", "supplemental"}], "*)"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"++", 
+      RowBox[{"++", 
+       RowBox[{"++", 
+        RowBox[{"++", 
+         RowBox[{"++", 
+          RowBox[{"++", 
+           RowBox[{"++", 
+            RowBox[{"++", 
+             RowBox[{"++", 
+              RowBox[{"++", 
+               RowBox[{"++", 
+                RowBox[{"++", 
+                 RowBox[{"++", 
+                  RowBox[{"++", 
+                   RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{
+                    "++", "+"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}\
+]}]}]}]}]}]}]}]}]}], 
+     StyleBox[
+      RowBox[{"*", ")"}]]}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{"delta", " ", "pik", " ", "derivation"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"deltap1k", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x11k", "*", 
+         RowBox[{"(", 
+          RowBox[{"w11k", "-", "wbark"}], ")"}]}], "+", 
+        RowBox[{"x10k", "*", 
+         RowBox[{"(", 
+          RowBox[{"w10k", "-", "wbark"}], ")"}]}]}], "/.", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"wbark", "\[Rule]", 
+         RowBox[{
+          RowBox[{"x11k", "*", "w11k"}], "+", 
+          RowBox[{"x10k", "*", "w10k"}], "+", 
+          RowBox[{"x01k", "*", "w01k"}], "+", 
+          RowBox[{"x00k", "*", "w00k"}]}]}], "\[IndentingNewLine]", "}"}]}]}],
+      ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<delta p1k = x11k*(w11k-wbark)+x10k*(w10k-wbark). After substituting \
+in the x's and w's from above, this simplifies to: \>\"", ",", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"Simplify", "[", "deltap1k", "]"}], "//.", 
+       RowBox[{"{", " ", 
+        RowBox[{"(*", 
+         RowBox[{"apply", " ", "rules", " ", "repeatedly"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"q0k", "+", "q1k"}], ")"}], "\[Rule]", "1"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"p0k", "+", "p1k"}], ")"}], "\[Rule]", "1"}]}], 
+        "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", "]"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<This can be rearranged like on pg2 of supplement: delta p1k = \
+d*p1k*p0k*(p1k-p0k)*(1-(1-a)*Dk^2/(p1k*pok*q1k*q0k))\>\"", "]"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]"}],
+   FontSize->12]}]], "Input",
+ CellChangeTimes->{{3.686468560447*^9, 3.6864686145578413`*^9}, 
+   3.6864686479468727`*^9, {3.686468690913973*^9, 3.686468774547976*^9}, {
+   3.6864691499563828`*^9, 3.6864694097833643`*^9}, {3.686469457730658*^9, 
+   3.6864695952776127`*^9}, {3.68646962765254*^9, 3.6864697280295897`*^9}, {
+   3.686469940728345*^9, 3.686470062614071*^9}, {3.6864701568462543`*^9, 
+   3.686470200932303*^9}, {3.686470231531755*^9, 3.686470240851872*^9}, 
+   3.6864703386423197`*^9, {3.686470369756057*^9, 3.686470436530437*^9}, {
+   3.686470467874959*^9, 3.686470483307465*^9}, {3.686470545480352*^9, 
+   3.686470557167885*^9}, {3.686470709120767*^9, 3.686470709773981*^9}, {
+   3.686470755592531*^9, 3.686470755750442*^9}, {3.686470894749695*^9, 
+   3.686470932258189*^9}, {3.6864709990028677`*^9, 3.686471005931756*^9}, {
+   3.686471045099661*^9, 3.686471047674932*^9}, {3.686471106475815*^9, 
+   3.686471113267391*^9}, 3.68647271521742*^9, 3.686473816928258*^9, {
+   3.687495726078631*^9, 3.687495733378068*^9}, 3.687496221011504*^9, 
+   3.687496279309868*^9, {3.6874963918449087`*^9, 3.687496437666975*^9}, {
+   3.687496487065651*^9, 3.687496487425743*^9}, {3.687496537699342*^9, 
+   3.687496580840789*^9}, {3.6874967302233543`*^9, 3.687496761646584*^9}, {
+   3.687696638547185*^9, 3.687696695654428*^9}, {3.6876969263204203`*^9, 
+   3.6876969273670683`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"wijk = \
+a*(pik*(1+d)+(1-pik)*1)+(1-a)*(xijk/qjk*(1+d)+(qjk-xijk)/qjk*1), which \
+simplifies to \"\>", "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"qjk", "+", 
+     RowBox[{"a", " ", "d", " ", "pik", " ", "qjk"}], "+", 
+     RowBox[{"d", " ", "xijk"}], "-", 
+     RowBox[{"a", " ", "d", " ", "xijk"}]}], "qjk"]}],
+  SequenceForm[
+  "wijk = a*(pik*(1+d)+(1-pik)*1)+(1-a)*(xijk/qjk*(1+d)+(qjk-xijk)/qjk*1), \
+which simplifies to ", $CellContext`qjk^(-1) ($CellContext`qjk + \
+$CellContext`a $CellContext`d $CellContext`pik $CellContext`qjk + \
+$CellContext`d $CellContext`xijk - $CellContext`a $CellContext`d \
+$CellContext`xijk)],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.6876967063905354`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"and can be rearranged to get wijk = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"1", "+", 
+    RowBox[{"d", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", " ", "pik"}], "+", 
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "-", "a"}], ")"}], " ", "xijk"}], "qjk"]}], ")"}]}]}]}],
+  SequenceForm[
+  "and can be rearranged to get wijk = ", 
+   1 + $CellContext`d ($CellContext`a $CellContext`pik + (
+       1 - $CellContext`a) $CellContext`qjk^(-1) $CellContext`xijk)],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.6876967064002867`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"D = x11*x00-x01*x10. Written in terms of p1, q1, and x11, D= \
+\"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "p1"}], " ", "q1"}], "+", "x11"}]}],
+  SequenceForm[
+  "D = x11*x00-x01*x10. Written in terms of p1, q1, and x11, D= ", \
+-$CellContext`p1 $CellContext`q1 + $CellContext`x11],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706411551*^9}],
+
+Cell[BoxData["\<\"rearrange as : \"\>"], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.6876967064223213`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"x11k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"Dk", "+", 
+    RowBox[{"p1k", " ", "q1k"}]}]}],
+  SequenceForm["x11k = ", $CellContext`Dk + $CellContext`p1k $CellContext`q1k],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706432974*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"x00k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"Dk", "+", 
+    RowBox[{"p0k", " ", "q0k"}]}], 
+   "\[InvisibleSpace]", "\<\" (analogously)\"\>"}],
+  SequenceForm[
+  "x00k = ", $CellContext`Dk + $CellContext`p0k $CellContext`q0k, 
+   " (analogously)"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706443674*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"expressed in terms of p1, q1, and x10, D = \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"p1", "-", 
+    RowBox[{"p1", " ", "q1"}], "-", "x10"}]}],
+  SequenceForm[
+  "expressed in terms of p1, q1, and x10, D = ", $CellContext`p1 - \
+$CellContext`p1 $CellContext`q1 - $CellContext`x10],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.6876967064541397`*^9}],
+
+Cell[BoxData["\<\"Simplify to p1*(1-q1)-x10 = p1*q0-x10, and rearrange as : \
+\"\>"], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706465003*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"x10k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"-", "Dk"}], "+", 
+    RowBox[{"p1k", " ", "q0k"}]}]}],
+  SequenceForm[
+  "x10k = ", -$CellContext`Dk + $CellContext`p1k $CellContext`q0k],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706475686*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"x01k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"-", "Dk"}], "+", 
+    RowBox[{"p0k", " ", "q1k"}]}], 
+   "\[InvisibleSpace]", "\<\" (analogously)\"\>"}],
+  SequenceForm[
+  "x01k = ", -$CellContext`Dk + $CellContext`p0k $CellContext`q1k, 
+   " (analogously)"],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706486239*^9}],
+
+Cell[BoxData["\<\"Phenotype fitnesses substituting p, q, and D for the x's: \
+\"\>"], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.6876967064967833`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"w11k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"1", "+", 
+    RowBox[{"d", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", " ", "p1k"}], "+", 
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "-", "a"}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{"Dk", "+", 
+           RowBox[{"p1k", " ", "q1k"}]}], ")"}]}], "q1k"]}], ")"}]}]}]}],
+  SequenceForm[
+  "w11k = ", 
+   1 + $CellContext`d ($CellContext`a $CellContext`p1k + (
+       1 - $CellContext`a) $CellContext`q1k^(-1) ($CellContext`Dk + \
+$CellContext`p1k $CellContext`q1k))],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706507472*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"w00k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"1", "+", 
+    RowBox[{"d", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", " ", "p0k"}], "+", 
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "-", "a"}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{"Dk", "+", 
+           RowBox[{"p0k", " ", "q0k"}]}], ")"}]}], "q0k"]}], ")"}]}]}]}],
+  SequenceForm[
+  "w00k = ", 
+   1 + $CellContext`d ($CellContext`a $CellContext`p0k + (
+       1 - $CellContext`a) $CellContext`q0k^(-1) ($CellContext`Dk + \
+$CellContext`p0k $CellContext`q0k))],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.6876967065181437`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"w10k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"1", "+", 
+    RowBox[{"d", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", " ", "p1k"}], "+", 
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "-", "a"}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "Dk"}], "+", 
+           RowBox[{"p1k", " ", "q0k"}]}], ")"}]}], "q0k"]}], ")"}]}]}]}],
+  SequenceForm[
+  "w10k = ", 
+   1 + $CellContext`d ($CellContext`a $CellContext`p1k + (
+       1 - $CellContext`a) $CellContext`q0k^(-1) (-$CellContext`Dk + \
+$CellContext`p1k $CellContext`q0k))],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.6876967065288754`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"w01k = \"\>", "\[InvisibleSpace]", 
+   RowBox[{"1", "+", 
+    RowBox[{"d", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{"a", " ", "p0k"}], "+", 
+       FractionBox[
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "-", "a"}], ")"}], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "Dk"}], "+", 
+           RowBox[{"p0k", " ", "q1k"}]}], ")"}]}], "q1k"]}], ")"}]}]}]}],
+  SequenceForm[
+  "w01k = ", 
+   1 + $CellContext`d ($CellContext`a $CellContext`p0k + (
+       1 - $CellContext`a) $CellContext`q1k^(-1) (-$CellContext`Dk + \
+$CellContext`p0k $CellContext`q1k))],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706539505*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"delta p1k = x11k*(w11k-wbark)+x10k*(w10k-wbark). After \
+substituting in the x's and w's from above, this simplifies to: \"\>", 
+   "\[InvisibleSpace]", 
+   RowBox[{"-", 
+    FractionBox[
+     RowBox[{"d", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "1"}], "+", "a"}], ")"}]}], " ", 
+         SuperscriptBox["Dk", "2"], " ", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", 
+           RowBox[{"2", " ", "p1k"}]}], ")"}]}], "+", 
+        RowBox[{"p1k", " ", 
+         RowBox[{"(", 
+          RowBox[{
+           SuperscriptBox["p0k", "2"], "-", "p1k", "+", 
+           SuperscriptBox["p1k", "2"]}], ")"}], " ", "q0k", " ", "q1k"}]}], 
+       ")"}]}], 
+     RowBox[{"q0k", " ", "q1k"}]]}]}],
+  SequenceForm[
+  "delta p1k = x11k*(w11k-wbark)+x10k*(w10k-wbark). After substituting in the \
+x's and w's from above, this simplifies to: ", -$CellContext`d \
+$CellContext`q0k^(-1) $CellContext`q1k^(-1) (-(-1 + $CellContext`a) \
+$CellContext`Dk^2 (-1 + 
+      2 $CellContext`p1k) + $CellContext`p1k ($CellContext`p0k^2 - \
+$CellContext`p1k + $CellContext`p1k^2) $CellContext`q0k $CellContext`q1k)],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706550229*^9}],
+
+Cell[BoxData["\<\"This can be rearranged like on pg2 of supplement: delta p1k \
+= d*p1k*p0k*(p1k-p0k)*(1-(1-a)*Dk^2/(p1k*pok*q1k*q0k))\"\>"], "Print",
+ CellChangeTimes->{3.687496977580315*^9, 3.687696706560894*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.686471291103368*^9, 3.686471292602105*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox[
+  RowBox[{
+   RowBox[{"(*", 
+    RowBox[{"++", 
+     RowBox[{"++", 
+      RowBox[{"++", 
+       RowBox[{"++", 
+        RowBox[{"++", 
+         RowBox[{"++", 
+          RowBox[{"++", 
+           RowBox[{"++", 
+            RowBox[{"++", 
+             RowBox[{"++", 
+              RowBox[{"++", 
+               RowBox[{"++", 
+                RowBox[{"++", 
+                 RowBox[{"++", 
+                  RowBox[{"++", 
+                   RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{
+                    "++", "++"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]\
+}]}]}]}]}]}]}]}]}], 
+    StyleBox[
+     RowBox[{"*", ")"}]]}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"delta", " ", "qjk", " ", "derivation"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"deltaq1k", " ", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x11k", "*", 
+         RowBox[{"(", 
+          RowBox[{"w11k", "-", "wbark"}], ")"}]}], "+", 
+        RowBox[{"x01k", "*", 
+         RowBox[{"(", 
+          RowBox[{"w01k", "-", "wbark"}], ")"}]}]}], "/.", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"wbark", "\[Rule]", 
+         RowBox[{
+          RowBox[{"x11k", "*", "w11k"}], "+", 
+          RowBox[{"x10k", "*", "w10k"}], "+", 
+          RowBox[{"x01k", "*", "w01k"}], "+", 
+          RowBox[{"x00k", "*", "w00k"}]}]}], "\[IndentingNewLine]", "}"}]}]}],
+      ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<delta q1k = x11k*(w11k-wbark)+x01k*(w01k-wbark).\n\nBy rearranging \
+and substituting q1k=x11k+x01k, this can be written as in the supplemental, \
+as: q0k*(x11k*w11k+x01k*W01k)-q1k*(x10k*w10k+x00k*w00k).  \n\nAfter \
+substituting in the x's and w's from above, this simplifies to: \>\"", ",", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"FullSimplify", "[", "deltaq1k", "]"}], "//.", 
+       RowBox[{"{", " ", 
+        RowBox[{"(*", 
+         RowBox[{"apply", " ", "rules", " ", "repeatedly"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"q0k", "+", "q1k"}], ")"}], "\[Rule]", "1"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"p0k", "+", "p1k"}], ")"}], "\[Rule]", "1"}]}], 
+        "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", "]"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<This can be rearranged like on pg2 of supplement: delta q1k = \
+2*d*Dk*(p1k-p0k)*( 1-a/2-(1-a)*Dk*(q1k-q0k)/(q1k*q0k*(p1k-p0k)) )\>\"", "]"}],
+     "\[IndentingNewLine]", "\[IndentingNewLine]", " "}]}],
+  FontSize->12]], "Input",
+ CellChangeTimes->{{3.686471395407942*^9, 3.686471441687703*^9}, {
+   3.686471477639205*^9, 3.686471495559155*^9}, {3.6864718179996977`*^9, 
+   3.686471841770453*^9}, {3.686471997664144*^9, 3.686471998311269*^9}, {
+   3.686472042543927*^9, 3.686472045259205*^9}, {3.686472138766241*^9, 
+   3.686472255180237*^9}, {3.6864723536506233`*^9, 3.686472462481134*^9}, {
+   3.686472675158558*^9, 3.6864726760854473`*^9}, {3.686472706525177*^9, 
+   3.686472706773012*^9}, 3.686472755276291*^9, {3.686472988409096*^9, 
+   3.6864729894403048`*^9}, {3.686473787580782*^9, 3.686473791278496*^9}, {
+   3.68647382937151*^9, 3.686473994784507*^9}, {3.6874966172469397`*^9, 
+   3.687496680957458*^9}, {3.687696766191765*^9, 3.687696783486711*^9}, {
+   3.687696935734034*^9, 3.68769693962995*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"delta q1k = x11k*(w11k-wbark)+x01k*(w01k-wbark).\\n\\nBy \
+rearranging and substituting q1k=x11k+x01k, this can be written as in the \
+supplemental, as: q0k*(x11k*w11k+x01k*W01k)-q1k*(x10k*w10k+x00k*w00k).  \
+\\n\\nAfter substituting in the x's and w's from above, this simplifies to: \
+\"\>", "\[InvisibleSpace]", 
+   FractionBox[
+    RowBox[{"d", " ", 
+     RowBox[{"(", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "2"}], "+", "a"}], ")"}], " ", "Dk", " ", 
+        RowBox[{"(", 
+         RowBox[{"p0k", "-", "p1k"}], ")"}], " ", "q0k", " ", "q1k"}], "+", 
+       RowBox[{"2", " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "1"}], "+", "a"}], ")"}], " ", 
+        SuperscriptBox["Dk", "2"], " ", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", "q0k"}], "+", 
+          RowBox[{"q0k", " ", "q1k"}], "+", 
+          SuperscriptBox["q1k", "2"]}], ")"}]}]}], ")"}]}], 
+    RowBox[{"q0k", " ", "q1k"}]]}],
+  SequenceForm[
+  "delta q1k = x11k*(w11k-wbark)+x01k*(w01k-wbark).\n\nBy rearranging and \
+substituting q1k=x11k+x01k, this can be written as in the supplemental, as: \
+q0k*(x11k*w11k+x01k*W01k)-q1k*(x10k*w10k+x00k*w00k).  \n\nAfter substituting \
+in the x's and w's from above, this simplifies to: ", $CellContext`d \
+$CellContext`q0k^(-1) $CellContext`q1k^(-1) ((-2 + $CellContext`a) \
+$CellContext`Dk ($CellContext`p0k - $CellContext`p1k) $CellContext`q0k \
+$CellContext`q1k + 
+    2 (-1 + $CellContext`a) $CellContext`Dk^2 (-$CellContext`q0k + \
+$CellContext`q0k $CellContext`q1k + $CellContext`q1k^2))],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.687497097917246*^9, 3.68769679061474*^9}],
+
+Cell[BoxData["\<\"This can be rearranged like on pg2 of supplement: delta q1k \
+= 2*d*Dk*(p1k-p0k)*( 1-a/2-(1-a)*Dk*(q1k-q0k)/(q1k*q0k*(p1k-p0k)) )\"\>"], \
+"Print",
+ CellChangeTimes->{3.687497097917246*^9, 3.687696790623643*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  StyleBox["\[IndentingNewLine]",
+   FontSize->36], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->36], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->12], 
+  StyleBox[
+   RowBox[{"(*", 
+    RowBox[{"++", 
+     RowBox[{"++", 
+      RowBox[{"++", 
+       RowBox[{"++", 
+        RowBox[{"++", 
+         RowBox[{"++", 
+          RowBox[{"++", 
+           RowBox[{"++", 
+            RowBox[{"++", 
+             RowBox[{"++", 
+              RowBox[{"++", 
+               RowBox[{"++", 
+                RowBox[{"++", 
+                 RowBox[{"++", 
+                  RowBox[{"++", 
+                   RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{"++", 
+                    RowBox[{
+                    "++", "+"}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}]}], 
+    StyleBox[
+     RowBox[{"*", ")"}]]}],
+   FontSize->12], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->12], 
+  StyleBox[
+   RowBox[{"(*", 
+    RowBox[{"delta", " ", "Dk", " ", "derivation"}], "*)"}],
+   FontSize->12], 
+  StyleBox["\[IndentingNewLine]",
+   FontSize->12], 
+  StyleBox[
+   RowBox[{
+    RowBox[{
+     RowBox[{"deltaDk", " ", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"x11k", "*", 
+         RowBox[{"w11k", "/", "wbark"}], "*", "x00k", "*", 
+         RowBox[{"w00k", "/", "wbark"}]}], "-", "\[IndentingNewLine]", 
+        RowBox[{"x10k", "*", 
+         RowBox[{"w10k", "/", "wbark"}], "*", "x01k", "*", 
+         RowBox[{"w01k", "/", "wbark"}]}], "-", "Dk"}], "/.", 
+       RowBox[{"{", "\[IndentingNewLine]", 
+        RowBox[{"wbark", "\[Rule]", "1"}], " ", 
+        RowBox[{"(*", 
+         RowBox[{"assume", " ", "weak", " ", "selection"}], "*)"}], 
+        "\[IndentingNewLine]", "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"Print", "[", 
+     RowBox[{
+     "\"\<Given that D=x11x00-x10x01, delta Dk = \
+x11k*w11k/wbark*x00k*w00k/wbark-x10k*w10k/wbark*x01k*w01k/wbark-Dk.\n\n\
+Supplemental assumes weak selection (wbark=1, d^2=0) and Dk^3=0.   \n\nAfter \
+substituting in the x's and w's from above, this simplifies to: \>\"", ",", 
+      "\[IndentingNewLine]", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"FullSimplify", "[", "deltaDk", "]"}], "//.", 
+       RowBox[{"{", " ", 
+        RowBox[{"(*", 
+         RowBox[{"apply", " ", "rules", " ", "repeatedly"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"q0k", "+", "q1k"}], ")"}], "\[Rule]", "1"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"p0k", "+", "p1k"}], ")"}], "\[Rule]", "1"}]}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"d", "^", "2"}], "\[Rule]", "0"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Dk", "^", "3"}], "\[Rule]", "0"}]}], "*)"}], 
+        "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", "]"}], 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Try", " ", "simplifying", " ", "a", " ", "different", " ", "way"}], 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s1", "=", 
+      RowBox[{
+       RowBox[{"FullSimplify", "[", "deltaDk", "]"}], "//.", 
+       RowBox[{"{", " ", 
+        RowBox[{"(*", 
+         RowBox[{"apply", " ", "rules", " ", "repeatedly"}], "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"q0k", "+", "q1k"}], ")"}], "\[Rule]", "1"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"p0k", "+", "p1k"}], ")"}], "\[Rule]", "1"}]}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"d", "^", "2"}], "\[Rule]", "0"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"Dk", "^", "3"}], "\[Rule]", "0"}]}], "*)"}], 
+        "\[IndentingNewLine]", "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"s2", "=", 
+      RowBox[{"Expand", "[", "s1", "]"}]}], ";"}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+    "Print", "[", 
+     "\"\<\nGetting close to delta Dk expression in supplemental: \>\"", 
+     "]"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"FullSimplify", "[", "s2", "]"}], "//.", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"d", "^", "2"}], "\[Rule]", "0"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Dk", "^", "3"}], "\[Rule]", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"q0k", "+", "q1k"}], ")"}], "\[Rule]", "1"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"p0k", "+", "p1k"}], ")"}], "\[Rule]", "1"}]}], 
+      "\[IndentingNewLine]", "}"}]}], "\[IndentingNewLine]", 
+    "\[IndentingNewLine]"}],
+   FontSize->12]}]], "Input",
+ CellChangeTimes->{{3.6864741479021473`*^9, 3.686474262155682*^9}, {
+   3.686474365914632*^9, 3.686474392377501*^9}, {3.68647443223281*^9, 
+   3.686474564556155*^9}, {3.686474600878962*^9, 3.6864747004684467`*^9}, {
+   3.686474761867449*^9, 3.686474855410973*^9}, {3.68647492537799*^9, 
+   3.6864749510661917`*^9}, {3.686475101879442*^9, 3.68647510623057*^9}, {
+   3.6864752369017572`*^9, 3.686475283763577*^9}, {3.686475319123742*^9, 
+   3.6864753303388777`*^9}, {3.686483179510071*^9, 3.6864832135562468`*^9}, {
+   3.686483260412561*^9, 3.6864833446258717`*^9}, {3.686483381385236*^9, 
+   3.686483405817762*^9}, {3.686483483344791*^9, 3.6864835202234573`*^9}, {
+   3.686483620127162*^9, 3.686483624745316*^9}, {3.687496685213829*^9, 
+   3.68749671428528*^9}, {3.6874969021317883`*^9, 3.687496931112989*^9}, {
+   3.687497411145973*^9, 3.687497475888208*^9}, 3.68749755995072*^9, {
+   3.687696803526634*^9, 3.687696815504781*^9}, {3.687696848870037*^9, 
+   3.687696849581971*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Given that D=x11x00-x10x01, delta Dk = \
+x11k*w11k/wbark*x00k*w00k/wbark-x10k*w10k/wbark*x01k*w01k/wbark-Dk.\\n\\\
+nSupplemental assumes weak selection (wbark=1, d^2=0) and Dk^3=0.   \
+\\n\\nAfter substituting in the x's and w's from above, this simplifies to: \
+\"\>", "\[InvisibleSpace]", 
+   RowBox[{
+    RowBox[{"-", "Dk"}], "+", 
+    RowBox[{
+     FractionBox["1", 
+      RowBox[{"q0k", " ", "q1k"}]], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"-", "Dk"}], "+", 
+        RowBox[{"p1k", " ", "q0k"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "a"}], ")"}], " ", "d", " ", "Dk"}], "+", 
+        "q0k", "+", 
+        RowBox[{"d", " ", "p1k", " ", "q0k"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{"Dk", "-", 
+        RowBox[{"p0k", " ", "q1k"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "a"}], ")"}], " ", "d", " ", "Dk"}], "+", 
+        "q1k", "+", 
+        RowBox[{"d", " ", "p0k", " ", "q1k"}]}], ")"}]}]}], "-", 
+    RowBox[{
+     FractionBox["1", 
+      RowBox[{"q0k", " ", "q1k"}]], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"Dk", "+", 
+        RowBox[{"p0k", " ", "q0k"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{"q0k", "+", 
+        RowBox[{"d", " ", 
+         RowBox[{"(", 
+          RowBox[{"Dk", "-", 
+           RowBox[{"a", " ", "Dk"}], "+", 
+           RowBox[{"p0k", " ", "q0k"}]}], ")"}]}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{"Dk", "+", 
+        RowBox[{"p1k", " ", "q1k"}]}], ")"}], " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"-", "1"}], "+", "a"}], ")"}], " ", "d", " ", "Dk"}], "-", 
+        
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"1", "+", 
+           RowBox[{"d", " ", "p1k"}]}], ")"}], " ", "q1k"}]}], ")"}]}]}]}]}],
+  SequenceForm[
+  "Given that D=x11x00-x10x01, delta Dk = \
+x11k*w11k/wbark*x00k*w00k/wbark-x10k*w10k/wbark*x01k*w01k/wbark-Dk.\n\n\
+Supplemental assumes weak selection (wbark=1, d^2=0) and Dk^3=0.   \n\nAfter \
+substituting in the x's and w's from above, this simplifies to: ", \
+-$CellContext`Dk + $CellContext`q0k^(-1) (-$CellContext`Dk + $CellContext`p1k \
+$CellContext`q0k) ((-1 + $CellContext`a) $CellContext`d $CellContext`Dk + \
+$CellContext`q0k + $CellContext`d $CellContext`p1k $CellContext`q0k) \
+$CellContext`q1k^(-1) ($CellContext`Dk - $CellContext`p0k $CellContext`q1k) \
+((-1 + $CellContext`a) $CellContext`d $CellContext`Dk + $CellContext`q1k + \
+$CellContext`d $CellContext`p0k $CellContext`q1k) - $CellContext`q0k^(-1) \
+($CellContext`Dk + $CellContext`p0k $CellContext`q0k) ($CellContext`q0k + \
+$CellContext`d ($CellContext`Dk - $CellContext`a $CellContext`Dk + \
+$CellContext`p0k $CellContext`q0k)) $CellContext`q1k^(-1) ($CellContext`Dk + \
+$CellContext`p1k $CellContext`q1k) ((-1 + $CellContext`a) $CellContext`d \
+$CellContext`Dk - (1 + $CellContext`d $CellContext`p1k) $CellContext`q1k)],
+  Editable->False]], "Print",
+ CellChangeTimes->{
+  3.6874973159372587`*^9, 3.687497491711628*^9, 3.687497565391686*^9, {
+   3.687696845043069*^9, 3.687696852038517*^9}}],
+
+Cell[BoxData["\<\"\\nGetting close to delta Dk expression in supplemental: \"\
+\>"], "Print",
+ CellChangeTimes->{
+  3.6874973159372587`*^9, 3.687497491711628*^9, 3.687497565391686*^9, {
+   3.687696845043069*^9, 3.687696852047477*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"-", 
+  RowBox[{
+   FractionBox["1", 
+    RowBox[{"q0k", " ", "q1k"}]], 
+   RowBox[{"d", " ", "Dk", " ", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"2", " ", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", "a"}], ")"}], " ", 
+       SuperscriptBox["Dk", "2"]}], "+", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "1"}], "+", "a"}], ")"}], " ", "Dk", " ", 
+       RowBox[{"(", 
+        RowBox[{"p0k", "-", "p1k"}], ")"}], " ", 
+       RowBox[{"(", 
+        RowBox[{"q0k", "-", "q1k"}], ")"}]}], "-", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         SuperscriptBox["p0k", "2"], "-", 
+         RowBox[{"2", " ", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"-", "2"}], "+", "a"}], ")"}], " ", "p0k", " ", "p1k"}], 
+         "+", 
+         SuperscriptBox["p1k", "2"]}], ")"}], " ", "q0k", " ", "q1k"}]}], 
+     ")"}]}]}]}]], "Output",
+ CellChangeTimes->{{3.6876968455901213`*^9, 3.687696852391708*^9}}]
+}, Open  ]]
+},
+WindowSize->{1871, 911},
+WindowMargins->{{Automatic, 70}, {Automatic, 0}},
+Magnification:>3. Inherited,
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 6, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 14837, 374, 5917, "Input"],
+Cell[CellGroupData[{
+Cell[15442, 400, 780, 17, 154, "Print"],
+Cell[16225, 419, 656, 17, 104, "Print"],
+Cell[16884, 438, 453, 11, 61, "Print"],
+Cell[17340, 451, 115, 1, 61, "Print"],
+Cell[17458, 454, 318, 7, 61, "Print"],
+Cell[17779, 463, 394, 10, 61, "Print"],
+Cell[18176, 475, 428, 10, 61, "Print"],
+Cell[18607, 487, 158, 2, 61, "Print"],
+Cell[18768, 491, 342, 9, 61, "Print"],
+Cell[19113, 502, 415, 11, 61, "Print"],
+Cell[19531, 515, 160, 2, 61, "Print"],
+Cell[19694, 519, 729, 21, 103, "Print"],
+Cell[20426, 542, 731, 21, 103, "Print"],
+Cell[21160, 565, 759, 22, 103, "Print"],
+Cell[21922, 589, 757, 22, 103, "Print"],
+Cell[22682, 613, 1371, 35, 212, "Print"],
+Cell[24056, 650, 214, 2, 107, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[24297, 656, 92, 1, 85, "Input"],
+Cell[CellGroupData[{
+Cell[24414, 661, 4139, 103, 1208, "Input"],
+Cell[CellGroupData[{
+Cell[28578, 768, 1743, 39, 437, "Print"],
+Cell[30324, 809, 229, 3, 107, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[30602, 818, 6245, 164, 2324, "Input"],
+Cell[CellGroupData[{
+Cell[36872, 986, 3347, 83, 522, "Print"],
+Cell[40222, 1071, 234, 4, 107, "Print"]
+}, Open  ]],
+Cell[40471, 1078, 1014, 32, 228, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
