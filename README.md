@@ -10,4 +10,4 @@ Files pertaining to collaboration with Cristina Moya and Richard McElreath
 
 ``combo_delta_pqD_9nov16c.nb``: mathematica notebook deriving recursions for p, q, D, and s for combined migration-markers model
 
-``feetmarkersim_13nov16b.r``: R simulation of combined model
+``feetmarkersim_18nov16.r``: R simulation of combined model
