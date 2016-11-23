@@ -160,7 +160,7 @@ feet_marker_sim <- function(
             } #i
 
             #recursion for group size    
-            snew[k] <- s[k]*(1 - m_k_n1) + s[n1]*m_n1_k + s[n2]*m_n2_k
+            snew[k] <- s[k]*(1 - m_k_n1 - m_k_n2) + s[n1]*m_n1_k + s[n2]*m_n2_k
 
         } #k
 
@@ -217,17 +217,17 @@ feet_marker_sim <- function(
 } #function
 
 feet_marker_sim(
-    ngroups=4,
-    tmax=500,
+    ngroups=100,
+    tmax=400,
     d=0.5, #coordination benefit
-    g=0.5, #extra coordination benefit among mutualists
-    h=0, #mis-coordination cost for mutualists
-    a=1, #probability of assorting on marker
-    m0=0.01, #base proportion of each group that migrates
-    mu=.9, #mean-payoff bias in migration decisions
-    s=c(0.25, 0.25, .25, .25), #proportion of total population in each group
-    init_p=c(0.9,0.1,.1,.1), #intial proportion of behavior 0 in each group
-    init_q=c(0.5,.5,.49,.51), #intial proportion of marker 0 in each group 
+    g=.1, #extra coordination benefit among mutualists
+    h=0.5, #mis-coordination cost for mutualists
+    a=.5, #probability of assorting on marker
+    m0=0.03, #base proportion of each group that migrates
+    mu=0.9, #mean-payoff bias in migration decisions
+    s=rep(.01,100), #proportion of total population in each group
+    init_p=c(rep(.9,20),rep(.1,80)), #intial proportion of behavior 0 in each group
+    init_q=c(rep(.6,20),rep(.4,80)), #intial proportion of marker 0 in each group 
     draw=TRUE )
 
 
