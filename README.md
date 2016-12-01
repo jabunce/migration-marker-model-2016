@@ -8,6 +8,6 @@ Files pertaining to collaboration with Cristina Moya and Richard McElreath
 
 ``feet_recursions_ps_11nov16.nb``: mathematica notebook deriving recursions for p and s for voting with feet model
 
-``combo_delta_pqD_9nov16c.nb``: mathematica notebook deriving recursions for p, q, D, and s for combined migration-markers model
+``combo_delta_pqD_1dec16.nb``: mathematica notebook deriving recursions for p, q, D, and s for combined migration-markers model
 
 ``feetmarkersim_18nov16.r``: R simulation of combined model
