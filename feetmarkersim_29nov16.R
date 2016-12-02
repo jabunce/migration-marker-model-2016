@@ -32,10 +32,9 @@ feet_marker_sim <- function(
 
     # init vector of group-mean fitnesses
     fit <- rep(0, times=ngroups)
-    fitp1 <- rep(0, times=ngroups)
-    fitq1 <- rep(0, times=ngroups)
+    fitp0 <- rep(0, times=ngroups)
     fitq0 <- rep(0, times=ngroups)
-    
+
     # fitness function
     # w0jk = 1-h+(d+g+h)((1-a)*p0k+a*x0jk/qjk)
     # w1jk = 1+d*((1-a)*p1k+a*x1jk/qjk)
@@ -45,10 +44,10 @@ feet_marker_sim <- function(
         j <- j+1
         
         if (i==1) {
-            w <- 1 - h + (d + g + h)*( (1 - a)*(x[[k]][1,1] + x[[k]][1,2]) +
+            w <- 1 - h + (d + g + h)*( (1 - a)*(x[[k]][1,1] + x[[k]][1,2]) +            #stag payoff (i=0, index=1)
                                         a*x[[k]][1,j]/(x[[k]][1,j] + x[[k]][2,j]) )
         } else {
-            w <- 1 + d*( (1 - a)*(x[[k]][2,1] + x[[k]][2,2]) +
+            w <- 1 + d*( (1 - a)*(x[[k]][2,1] + x[[k]][2,2]) +                          #hare payoff (i=1, index=2)
                             a*x[[k]][2,j]/(x[[k]][1,j] + x[[k]][2,j]) )
         } #else
 
@@ -129,8 +128,7 @@ feet_marker_sim <- function(
             xnew[[k]][2,1] <- x[[k]][2,1] * w10k / wbar
             xnew[[k]][2,2] <- x[[k]][2,2] * w11k / wbar
             
-            fitp1[k] <- (w10k+w11k)/ (w10k+w11k+w01k+w00k)
-            fitq1[k] <- (w01k+w11k)/ (w10k+w11k+w01k+w00k)
+            fitp0[k] <- (w00k+w01k)/ (w10k+w11k+w01k+w00k)
             fitq0[k] <- (w00k+w10k)/ (w10k+w11k+w01k+w00k)
             fit[k] <- wbar #save group-mean fitness for later
         } #k
@@ -176,11 +174,11 @@ feet_marker_sim <- function(
             linkage <- linkage + 0.5
             
             #update results matrices
-            # p_mat <- rbind(p_mat, p)
-            # q_mat <- rbind(q_mat, q)
-            # D_mat <- rbind(D_mat, linkage-0.5)
-            s_mat <- rbind(s_mat, s)
-            # fit_mat <-rbind(fit_mat, fit/sum(fit))
+             # p_mat <- rbind(p_mat, p)
+             # q_mat <- rbind(q_mat, q)
+             # D_mat <- rbind(D_mat, linkage-0.5)
+             s_mat <- rbind(s_mat, s)
+             # fit_mat <-rbind(fit_mat, fit/sum(fit))
             
             if ( t==1 ) {
                 plot( 1:ngroups , p , ylim=c(0,1) , lwd=2 )
@@ -192,10 +190,9 @@ feet_marker_sim <- function(
             lines( 1:ngroups , linkage , col="blue" )   #linkage btwn bhvr & marker per grp
             lines( 1:ngroups , s , col="green")         #proportion of population in each group
             lines( 1:ngroups , fit/sum(fit) , col="cyan")         #prop of total fitness of each group
-            points( 1:ngroups , fit/sum(fitp1) , col="cyan")         #prop of group fitness of behavior 1
-            lines( 1:ngroups , fit/sum(fitq1) , col="lightblue", lty=2)         #prop of group fitness of marker 1
-            lines( 1:ngroups , fit/sum(fitq0) , col="lightblue", lty=3)         #prop of group fitness of marker 1
-            legend (ngroups*.6, 1, legend=c("prop. bhvr", "prop. marker", "linkage", "prop in grp", "fitness", "payoff p1", "payoff q1"), 
+            points( 1:ngroups , fitp0 , col="cyan")         #prop of group fitness of behavior 0
+            lines( 1:ngroups , fitq0 , col="lightblue", lty=3)         #prop of group fitness of marker 0
+            legend (ngroups*.6, 1, legend=c("prop. bhvr 0", "prop. marker 0", "linkage", "prop in grp", "fitness", "payoff p0", "payoff q0"), 
                     col=c("black", "red", "blue", "green", "cyan", "cyan", "lightblue"), pch=c(1,19,19,19,19,1,1))
         }
         
@@ -204,9 +201,9 @@ feet_marker_sim <- function(
     invisible(x)
 
     print(s[1:ngroups])
-    print(sum(s[1:ngroups])) #for testing = 1
+    print(linkage)
     print(fit)
-    
+    print(fitq0)
     # plot(0:tmax, p_mat[,1], ylim=c(0,1) , lwd=2, col="black" )
     # points(0:tmax, p_mat[,2], ylim=c(0,1) , lwd=2, col="blue")
     # lines(0:tmax, q_mat[,1], ylim=c(0,1) , lwd=2, col="black")
@@ -223,16 +220,17 @@ feet_marker_sim <- function(
 } #function
 
 feet_marker_sim(
-    tmax=100,
-    d=0.5, #coordination benefit
-    g=2, #extra coordination benefit among mutualists
-    h=0, #mis-coordination cost for mutualists
-    a=0, #probability of assorting on marker
-    m0=0.03, #proportion of each group that migrates
-    mu=0, #of all migrants, proportion that engage in payoff biased migration
-    s=rep(.1,10), #proportion of total population in each group
-    init_p=c(rep(.9,4),rep(.1,6)), #intial proportion of behavior 0 in each group
-    init_q=c(rep(.6,4),rep(.4,6)), #intial proportion of marker 0 in each group 
-    draw=TRUE )
+  tmax=100,
+  d=0.5, #coordination benefit
+  g=.29, #extra coordination benefit among mutualists
+  h=0.5, #mis-coordination cost for mutualists
+  a=0.9, #probability of assorting on marker
+  m0=0.1, #proportion of each group that migrates
+  mu=0.1, #of all migrants, proportion that engage in payoff biased migration
+  s=rep(.1,10), #proportion of total population in each group
+  init_p=c(rep(.6,3),rep(.4,7)), #intial proportion of behavior 0 in each group
+  init_q=c(rep(.6,3),rep(.4,7)), #intial proportion of marker 0 in each group 
+  draw=TRUE )
+
 
 
